@@ -1,0 +1,147 @@
+# SpamAssassin sample procmailrc
+# ==============================
+
+# The following line is only used if you use a system-wide /etc/procmailrc.
+# See procmailrc(5) for infos on what it exactly does, the short version:
+#  * It ensures that the correct user is passed to spamd if spamc is used
+#  * The folders the mail is filed to later on is owned by the user, not
+#    root.
+DROPPRIVS=yes
+LOGFILE=$HOME/.procmail.log
+
+# Pipe the mail through spamassassin (replace 'spamassassin' with 'spamc'
+# if you use the spamc/spamd combination)
+#
+# The condition line ensures that only messages smaller than 250 kB
+# (250 * 1024 = 256000 bytes) are processed by SpamAssassin. Most spam
+# isn't bigger than a few k and working with big messages can bring
+# SpamAssassin to its knees.
+#
+# The lock file ensures that only 1 spamassassin invocation happens
+# at 1 time, to keep the load down.
+#
+#:0fw: spamassassin.lock
+#* < 256000
+#| spamassassin
+
+# Mails with a score of 15 or higher are almost certainly spam (with 0.05%
+# false positives according to rules/STATISTICS.txt). Let's put them in a
+# different mbox. (This one is optional.)
+:0:
+* ^X-Spam-Level: \*\*\*\*\*\*\*\*\*\*\*\*\*\*\*
+mail/Spam
+
+# All mail tagged as spam (eg. with a score higher than the set threshold)
+# is moved to "probably-spam".
+:0:
+* ^X-Spam-Status: Yes
+mail/Spam
+
+# Deliver list centos@centos.org to folder centos
+:0w
+* ^(To|Cc|X-Mailing-List|List-Id):..*centos@centos\.org\.*
+mail/centos
+
+:0w
+* ^(To|Cc|X-Mailing-List|List-Id):..*centos-announce@centos\.org\.*
+mail/centos
+
+
+# Deliver list pgsql-general@postgresql.org to folder postgresql
+:0w
+* ^(To|Cc|X-Mailing-List|List-Id):..*pgsql-general@postgresql\.org\.*
+mail/postgresql
+
+:0w
+* ^(To|Cc|X-Mailing-List|List-Id):..*pgsql-announce@postgresql\.org\.*
+mail/postgresql
+
+
+# Deliver list pgsql-admin@postgresql.org to folder postgresql
+:0w
+* ^(To|Cc|X-Mailing-List|List-Id):..*pgsql-admin@postgresql\.org\.*
+mail/postgresql
+
+#golang mailing list
+:0w
+* ^(To|Cc|Mailing-List|List-Id):..*golang-nuts@googlegroups\.com\.*
+mail/gonuts
+
+# openbsc mailing list
+:0w
+* ^(To|Cc|X-Mailing-List|List-Id):..*openbsc@lists\.osmocom\.org\.*
+mail/openbsc
+
+# openbsc pcu mailing list
+:0w
+* ^(To|Cc|X-Mailing-List|List-Id):..*osmocom-pcu@lists\.osmocom\.org\.*
+mail/openbsc
+
+:0w
+* ^(To|Cc|X-Mailing-List|List-Id):..*openbsc@lists\.gnumonks\.org\.*
+mail/openbsc
+
+#isdn4linux  mailing list 
+:0w
+* ^(To|Cc|X-Mailing-List|List-Id):..*isdn4linux.*@listserv\.isdn4linux\.de\.*
+mail/isdn4linux
+
+#baseband (osmocom-bb) mailing list 
+:0w
+* ^(To|Cc|X-Mailing-List|List-Id):..*baseband.*@lists\.osmocom\.org\.*
+mail/baseband-devel
+
+#osmocom gmr mailing list 
+:0w
+* ^(To|Cc|X-Mailing-List|List-Id):..*gmr.*@lists\.osmocom\.org\.*
+mail/osmo-gmr
+
+#osmocom sdr mailing list 
+:0w
+* ^(To|Cc|X-Mailing-List|List-Id):..*osmocom-sdr.*@lists\.osmocom\.org\.*
+mail/osmo-sdr
+
+#openbts mailing list 
+:0w
+* ^(To|Cc|X-Mailing-List|List-Id):..*openbts.*@lists\.sourceforge\.net\.*
+mail/openbts
+
+# Deliver list sers@qpid.apache.org to folder qpid
+:0w
+* ^(To|Cc|X-Mailing-List|List-Id):..*sers@qpid\.apache\.org\.*
+mail/qpid
+
+
+#ietf-dime mailing list 
+:0w
+* ^(To|Cc|X-Mailing-List|List-Id):..*dime.*@.*ietf\.org\.*
+mail/ietf-dime
+
+#ietf-sipcore mailing list 
+:0w
+* ^(To|Cc|X-Mailing-List|List-Id):..*sipcore.*@.*ietf\.org\.*
+mail/ietf-sipcore
+
+#ietf-pim mailing list 
+:0w
+* ^(To|Cc|X-Mailing-List|List-Id):..*pim.*@.*ietf\.org\.*
+mail/ietf-pim
+
+#ietf-tsvwg mailing list 
+:0w
+* ^(To|Cc|X-Mailing-List|List-Id):..*tsvwg.*@.*ietf\.org\.*
+mail/ietf-tsvwg
+
+#ietf bfd mailing list 
+:0w
+* ^(To|Cc|X-Mailing-List|List-Id):..*rtg-bfd.*@.*ietf\.org\.*
+mail/rtg-bfd
+
+#linux sctp mailing list
+:0w
+* ^(To|Cc|X-Mailing-List|List-Id):..*lksctp.*@.*lists\.sourceforge\.net\.*
+mail/lksctp
+
+#RTEMS mailing lists
+* ^(To|Cc|X-Mailing-List|List-Id):..*rtems.*@-*rtems\.org\.*
+

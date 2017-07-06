@@ -1,0 +1,174 @@
+#
+# sample golem rc file.
+#
+
+#
+# Include theme rcfile
+#
+#.include "themes/MudGolem/rc"
+#.include "themes/eBlueSteel/rc"
+#.include "themes/twm/rc"
+#.include "themes/AbsoluteE/rc"
+.include "themes/microGUI/rc"
+
+#
+# Define general options.
+#
+options {
+	desktop_count		2;
+	desktop_width		1;
+	desktop_height		1;
+	fullscreen_zoom		true;
+	opaquemove		false;
+
+	# use to change the color/width of the line used to draw
+	# winboxes.
+	linewidth		3;
+	linefg			"green";
+
+	#
+	# placement works in golem by using a placement type,
+	# such as placement_smart or placement_random, and then
+	# optionally using interactivity just before placing the
+	# window, which allows for hybrid-manual placement styles.
+	#
+	placement		placement_smart;
+	place_nonzeros		false;
+	place_transients	false;
+
+	# uncomment this and use it with the settings above to try a
+	# hybrid-manual style: the window is placed using placement_smart
+	# and then you are given interact_timeout time to place it, or it'll
+	# go where it is.
+	#place_interactive	true;
+	#interact_timeout	300000;
+
+	# try this for a 'traditional' manual placement feel
+	#placement		placement_pointer;
+	#place_nonzeros		true;
+	#place_transients	true;
+	#place_interactive	true;
+	#interact_timeout	0;
+
+	# various focusing options
+	#focus			focus_sloppy;
+	#focus			focus_pointer;
+	#focus_new		false;
+	focus			focus_click;
+
+	# should golem try to use MITSHM to store ximages
+	wantmitshm		true;
+
+	# on slower machines you'll want to turn this off
+	workspace_slide	false;
+
+	# use this to make the resizing automatically bind to
+	# the corner that the mouse is closest too
+	relative_resize	true;
+
+	# when compiled with xinerama, this option causes the
+	# windowmanager to modify the position of windows that
+	# request a toplevel mapping that falls across two or
+	# more monitors to try to put the window in only one
+	# monitor; this option is ineffectual if both
+	# place_transients and place_nonzeros are enabled.
+	#xinerama_correctloc	true;
+}
+
+#
+# Define hotkeys.
+#
+# these examples aren't mnemonic; rather they are placed to allow
+# you to control all keyboard stuff from the left hand, so that
+# you may leave the right hand on the mouse.  Needless to say,
+# that leaves left-handers with a bit of a problem...  
+#
+# I have these using modifier keys that might not make sense
+# depending on your system.  xmodmap(1) can be used to determine
+# or modify modifier keys; on my machine Mod1 is the alt key,
+# and Mod4 is my meta key (my Windows(tm) key is bound to Meta).
+#
+# another tip: if you're the sort who likes _lots_ of hotkeys,
+# you may want to put your keys section in ~/.golem/keysrc and
+# then just use a .include "keysrc" here.
+#
+keys {
+	#
+	# because key_command passes it's arg to /bin/sh, put an exec
+	# in front of the program to prevent it from leaving an sh -c
+	# process laying around
+	#
+	key_command		"q"	(Mod4Mask) "exec urxvt";
+
+	key_iconify 		"a"	(Mod4Mask);
+	key_zoom		"z"	(Mod4Mask);
+	key_delete		"e"	(Mod4Mask);
+	key_dgroup_switch	"c"	(Mod4Mask);
+	key_raise		"Up"	(Mod4Mask);
+	key_lower		"Down"	(Mod4Mask);
+	key_sticky		"s"	(Mod4Mask);
+
+	key_switchdesktop	"1"	(Mod4Mask) 0;
+	key_switchdesktop	"2"	(Mod4Mask) 1;
+	key_moveviewport	"Up"	(Mod1Mask | Mod4Mask) mv_up;
+	key_moveviewport	"Down"	(Mod1Mask | Mod4Mask) mv_down;
+	key_moveviewport	"Left"	(Mod1Mask | Mod4Mask) mv_left;
+	key_moveviewport	"Right"	(Mod1Mask | Mod4Mask) mv_right;
+	#
+	# here's another example that allows you to use all
+	# left hand for this; and thus keep the right hand on
+	# the mouse...
+	#
+	#key_moveviewport	"w"	(ControlMask | Mod1Mask) mv_up;
+	#key_moveviewport	"s"	(ControlMask | Mod1Mask) mv_down;
+	#key_moveviewport	"a"	(ControlMask | Mod1Mask) mv_left;
+	#key_moveviewport	"d"	(ControlMask | Mod1Mask) mv_right;
+
+	#
+	# you can also make non-relative viewport moving bindings
+	#
+	#key_setviewport	"1"	(Mod4Mask) 0,0;
+	#key_setviewport	"2"	(Mod4Mask) 1,1;
+
+	#
+	# golem has several methods of focus cycling with hotkeys that
+	# are useful for people using multi-screen displays.  I use the
+	# settings below, which make alt-tab and mod4-tab do normal
+	# cycling on the screen that has the focused window, and alt-esc
+	# and mod4-esc do cycling between screens.  One other style
+	# that you may be interested in is cycle_fall and cycle_ball,
+	# which cycle all the visible windows on any screen.
+	#
+	key_cycle_focus	"Tab"		(Mod1Mask) cycle_fwspace;
+	key_cycle_focus	"Tab"		(Mod4Mask) cycle_bwspace;
+	key_cycle_focus	"Escape"	(Mod1Mask) cycle_fscr;
+	key_cycle_focus	"Escape"	(Mod4Mask) cycle_bscr;
+
+	#
+	# this is disabled by default so that people don't accidently
+	# restart the window manager.
+	#
+	#key_restart	"Escape"	(Mod1Mask | Mod4Mask);
+}
+
+#
+# Plugin loading, we include from rc files, so we don't
+# make a huge mess here.  Note that plugins are operated
+# on in the order that they were loaded; so, for instance,
+# you should choose order of precedence by putting
+# wmclass_defs after mwm_hints if you want it to override
+# what mwmhints has set.
+#
+##.include "plugins/pier/rc"
+.include "plugins/simple_menus/rc"
+.include "plugins/pager/rc"
+.include "plugins/box_iconify/rc"
+.include "plugins/animations/rc"
+.include "plugins/mwm_hints/rc"
+
+# other plugins you may be interested in
+#.include "plugins/sound/rc"
+.include "plugins/gnome/rc"
+#.include "plugins/setroot/rc"
+.include "plugins/wmclass_defs/rc"
+#.include "plugins/start_slide/rc"

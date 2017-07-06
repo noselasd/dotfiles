@@ -1,0 +1,34 @@
+[user]
+	email = noselasd@fiane.mooo.com
+	name = Nils O. Selåsdal
+[alias]
+    br = branch -va
+	ci = commit
+    co = checkout
+    blr = for-each-ref --sort=-committerdate refs/remotes/ --format='%(committerdate:short) %(refname:short) %(authorname)'
+    bll = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(HEAD) %(refname:short) %(authorname)'
+    unpushed = !GIT_CURRENT_BRANCH=$(git name-rev --name-only HEAD) && git log origin/$GIT_CURRENT_BRANCH..$GIT_CURRENT_BRANCH --oneline
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    flog = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
+    vlog = log --name-status
+#briefdiff, handy for showing branch changes (use with master...branchname)
+    briefdiff = diff  --stat --color 
+    up = "!git fetch -p; git merge --ff-only @{u}"
+
+[diff]
+    guitool = meld
+
+[difftool]
+    prompt = No
+
+
+[push]
+	default = simple
+
+[diff]
+    tool = meld
+    renames = true
+
+[difftool]
+    prompt = false
+

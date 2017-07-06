@@ -1,0 +1,12 @@
+#!/bin/sh
+#remove caps lock
+setxkbmap -option ctrl:nocaps
+#map caps lock to /
+xmodmap -e 'keycode 66=slash'
+setxkbmap -option "nbsp:none"
+xset dpms 600 700 800
+kupfer --no-splash </dev/null >/dev/null 2>/dev/null &
+~/.dropbox-dist/dropboxd start >/dev/null 2>&1 &
+krb5-auth-dialog >/dev/null 2>&1 &
+
+

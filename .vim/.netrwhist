@@ -1,0 +1,10 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =8
+let g:netrw_dirhist_1='/home/noselasd/tmp/openbts/smqueue/trunk/config'
+let g:netrw_dirhist_2='/home/noselasd/tmp/freeDiameter-1.1.4/extensions/dict_legacy_xml'
+let g:netrw_dirhist_3='/home/noselasd/tmp/osmocom/osmo-sdr/fpga/hw-v2/src/usbrx/datapath'
+let g:netrw_dirhist_4='/home/noselasd/tmp/linux-3.7.6/net/8021q'
+let g:netrw_dirhist_5='/home/noselasd/tmp/cFE-6.1.1-OSS-release/cfe/fsw/cfe-core/src/es'
+let g:netrw_dirhist_6='/home/noselasd/tmp/rtems-4.10.2/cpukit/libfs/src/dosfs'
+let g:netrw_dirhist_7='/home/noselasd/tmp/rtems-4.10.2/cpukit/libfs/src'
+let g:netrw_dirhist_8='/home/noselasd/tmp/fv5.3/x86_64-unknown-linux-gnu-libc2.16/bin'
