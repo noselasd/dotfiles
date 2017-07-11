@@ -83,6 +83,7 @@ map <leader>pp :setlocal paste!<cr>
 
 " Use relative line numbers, but show current line number
 set relativenumber
+set number
 
 " tag completion on html files
 autocmd FileType html set omnifunc=htmlcomplete#CompleteTags
