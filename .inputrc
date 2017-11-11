@@ -1,3 +1,4 @@
 set completion-ignore-case On
+set completion-map-case On
 "\ew": shell-kill-word
 
