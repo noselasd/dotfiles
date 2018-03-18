@@ -14,9 +14,11 @@
 #briefdiff, handy for showing branch changes (use with master...branchname)
     briefdiff = diff  --stat --color 
     up = "!git fetch -p; git merge --ff-only @{u}"
+    diffall = !git difftool --dir-diff
 
 [diff]
     guitool = meld
+    tool = meld
 
 [difftool]
     prompt = No
