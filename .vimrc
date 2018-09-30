@@ -98,3 +98,5 @@ if filereadable(".vim.custom")
     so .vim.custom
 endif
 
+" make git commit start at top
+autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
