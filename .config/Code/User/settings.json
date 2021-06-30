@@ -1,0 +1,13 @@
+{
+    "git.ignoreLegacyWarning": true,
+    "go.lintOnSave": "off",
+    "git.autofetch": true,
+    "editor.fontFamily": "'DejaVu Sans Mono','Droid Sans Mono', 'Courier New', monospace, 'Droid Sans Fallback'",
+    "workbench.iconTheme": "vscode-icons",
+    "editor.renderControlCharacters": true,
+    "files.enableTrash": false,
+    "go.formatTool": "goimports",
+    "extensions.ignoreRecommendations": true,
+    "security.workspace.trust.enabled": false,
+    "files.trimTrailingWhitespace": true
+}
