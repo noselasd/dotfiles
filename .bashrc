@@ -24,3 +24,7 @@ function psgrep() {
 }
 
 alias rpmdate="date +\"%a %b %d %Y\""
+PS1="\u@\h \t \j \[\e[1;32m\]\w\[\e[0m\]\[\033[33m\]\$(parse_git_branch)\[\033[00m\]\n\$ "
+parse_git_branch() {
+     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+}
