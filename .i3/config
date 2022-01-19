@@ -17,13 +17,14 @@ new_window normal
 set $mod Mod4
 
 # font for window titles. ISO 10646 = Unicode
-font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+#font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+font pango:DejaVu Sans Mono 10
 
 # Use Mouse+$mod to drag floating wrndows to their wanted position
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec gnome-terminal
+bindsym $mod+Return exec xfce4-terminal
 
 bindsym $mod+m exec Thunar
 
@@ -31,7 +32,7 @@ bindsym $mod+m exec Thunar
 bindsym $mod+Shift+Q kill
 
 # start dmenu (a program launcher)
-#bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec dmenu_run
 
 # change focus
 bindsym $mod+j focus left
@@ -144,6 +145,21 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
+
+bindsym $mod+Tab workspace back_and_forth
+
+# Window swapping
+mode "swap-dest" {
+     set $swp_cmd swap container with mark quickswap; [con_mark="quickswap"] focus; unmark quickswap; mode default
+     bindsym --whole-window button1 $swp_cmd
+     bindsym --whole-window $mod+Shift+button1 $swp_cmd
+
+     set $cancel_cmd unmark quickswap; mode "default"
+     bindsym Return $cancel_cmd
+     bindsym Escape $cancel_cmd
+}
+bindsym --whole-window $mod+Shift+button1 mark --add quickswap; mode "swap-dest"
+
 
 #Run command
 for_window [class="(?i)gmrun"] floating enable move position center border normal
