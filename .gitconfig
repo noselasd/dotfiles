@@ -16,7 +16,7 @@
     up = "!git fetch -p; git merge --ff-only @{u}"
     diffall = !git difftool --dir-diff
     bd =for-each-ref --format='%(if:equals=[gone])%(upstream:track)%(then)git branch -d %(refname:short)%(end)' refs/heads
-    bD =for-each-ref --format='%(if:equals=[gone])%(upstream:track)%(then)git branch -D %(refname:short)%(end)' refs/heads
+    bx =for-each-ref --format='%(if:equals=[gone])%(upstream:track)%(then)git branch -D %(refname:short)%(end)' refs/heads
 
 [diff]
     guitool = meld
