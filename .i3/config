@@ -113,6 +113,12 @@ bindsym $mod+Shift+parenleft move container to workspace 8
 bindsym $mod+Shift+parenright move container to workspace 9
 bindsym $mod+Shift+equal move container to workspace 10
 
+# renaming container
+bindsym $mod+o exec "i3-input -P \\"Change Title: \\" -F 'title_format \\"<span><b><tt>%s:</tt></b>%title</span>\\"'"
+# sets back to default i3 container title
+bindsym $mod+Shift+o title_format " %title"
+
+
 # reload the configuration file
 bindsym $mod+Shift+C reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -163,13 +169,14 @@ bindsym --whole-window $mod+Shift+button1 mark --add quickswap; mode "swap-dest"
 
 #Run command
 for_window [class="(?i)gmrun"] floating enable move position center border normal
+for_window [class="(?i)Calendar"] floating enable border normal
+for_window [title="(?i)Task Manager"] floating enable border normal
 bindsym $mod+F1 exec gmrun
 bindsym Print exec gnome-screenshot -i
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
         status_command i3status
-        tray_output primary
 }
 exec ~/.i3/autostart 
 
