@@ -101,3 +101,5 @@ endif
 
 " make git commit start at top
 autocmd FileType gitcommit call setpos('.', [0, 1, 1, 0])
+" Turn off syntax for markdown
+autocmd FileType markdown setlocal syntax=off
