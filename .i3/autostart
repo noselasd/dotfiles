@@ -1,6 +1,6 @@
 #!/bin/sh
 #remove caps lock
-setxkbmap -option ctrl:nocaps
+setxkbmap -option caps:none
 #map caps lock to /
 xmodmap -e 'keycode 66=slash'
 setxkbmap -option "nbsp:none"
