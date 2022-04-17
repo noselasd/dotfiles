@@ -33,4 +33,4 @@ parse_git_branch() {
 }
 
 
-PS1="\e[48;5;20m\u@\h \t \j \e[48;5;22m \w \e[0m\e[38;5;202m$(parse_git_branch)\e[0m\n$ "
+PS1="\e[48;5;20m\u@\h \t \j \e[48;5;22m \w \e[0m\e[38;5;202m\$(parse_git_branch)\e[0m\n$ "
