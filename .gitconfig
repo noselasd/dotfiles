@@ -6,8 +6,8 @@
 	ci = commit
     co = checkout
     blr = for-each-ref --sort=-committerdate refs/remotes/ --format='%(committerdate:short) %(refname:short) %(authorname)'
-    bll = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(HEAD) %(refname:short) %(authorname)'
-    unpushed = !GIT_CURRENT_BRANCH=$(git name-rev --name-only HEAD) && git log origin/$GIT_CURRENT_BRANCH..$GIT_CURRENT_BRANCH --oneline
+    bll = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(HEAD)%(refname:short) %(authorname) %(push:track)'
+    unpushed = log --color @{push}.. --oneline
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     flog = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
     vlog = log --name-status
