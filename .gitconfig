@@ -11,12 +11,13 @@
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     flog = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
     vlog = log --name-status
-#briefdiff, handy for showing branch changes (use with master...branchname)
+    #briefdiff, handy for showing branch changes (use with master...branchname)
     briefdiff = diff  --stat --color 
     up = "!git fetch -p; git merge --ff-only @{u}"
     diffall = !git difftool --dir-diff
     bd =for-each-ref --format='%(if:equals=[gone])%(upstream:track)%(then)git branch -d %(refname:short)%(end)' refs/heads
     bx =for-each-ref --format='%(if:equals=[gone])%(upstream:track)%(then)git branch -D %(refname:short)%(end)' refs/heads
+    psu = push --set-upstream origin HEAD
 
 [diff]
     guitool = meld

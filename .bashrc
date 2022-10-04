@@ -8,6 +8,7 @@ fi
 
 alias lc="ls -C | less"
 alias ll="ls -lh"
+alias g=git
 
 function mkd() {
     if [[ $#  == 0 ]] ; then 
