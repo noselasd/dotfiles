@@ -5,6 +5,7 @@
     br = branch -va
 	ci = commit
     co = checkout
+    st = status
     blr = for-each-ref --sort=-committerdate refs/remotes/ --format='%(committerdate:short) %(refname:short) %(authorname)'
     bll = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(HEAD)%(refname:short) %(authorname) %(push:track)'
     unpushed = log --color @{push}.. --oneline
