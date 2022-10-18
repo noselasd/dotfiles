@@ -2,6 +2,8 @@
 
 # Source global definitions
 export EDITOR=vim
+export DOCKER_BUILDKIT=0
+export BUILDKIT_PROGRESS=plain
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc
 fi
@@ -9,6 +11,7 @@ fi
 alias lc="ls -C | less"
 alias ll="ls -lh"
 alias g=git
+alias rpmdate="date +\"%a %b %d %Y\""
 
 function mkd() {
     if [[ $#  == 0 ]] ; then 
@@ -19,11 +22,6 @@ function mkd() {
     cd "$1"
 }
 
-function psgrep() {                                                                                                                                                                      
-    ps axuf | grep -v grep | grep "$@" -i --color=auto;                                                                                                                                  
-}
-
-alias rpmdate="date +\"%a %b %d %Y\""
  # set terminal window title
 function title() {
     print -Pn "\e]2;$@\a"
@@ -34,4 +32,15 @@ parse_git_branch() {
 }
 
 
-PS1="\e[48;5;20m\u@\h \t \j \e[48;5;22m \w \e[0m\e[38;5;202m\$(parse_git_branch)\e[0m\n$ "
+PS1="\e[48;5;20m\u@\h \t \j\e[\e[48;5;22m\e[38;5;20m▛\e[0m\e[48;5;22m \w \e[0m\e[38;5;22m▛\e[0m\e[38;5;202m\$(parse_git_branch)\e[0m\n$ "
+
+
+function nvm_load() {
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+}
+. "$HOME/.cargo/env"
+
+function virtualenvwrapper() {
+    . ~/bin/virtualenvwrapper
+} 
