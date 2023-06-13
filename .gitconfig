@@ -2,23 +2,36 @@
 	email = nos@utel.tech
 	name = Nils O. Selåsdal
 [alias]
+    # list all branches
     br = branch -va
 	ci = commit
     co = checkout
     st = status
+    # List remote branches
     blr = for-each-ref --sort=-committerdate refs/remotes/ --format='%(committerdate:short) %(refname:short) %(authorname)'
+    # List local branches
     bll = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(HEAD)%(refname:short) %(authorname) %(push:track)'
+    # show commits not pused upstream
     unpushed = log --color @{push}.. --oneline
+    # various handy log outputs
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     flog = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
     vlog = log --name-status
+    #
     #briefdiff, handy for showing branch changes (use with master...branchname)
     briefdiff = diff  --stat --color 
-    up = "!git fetch -p; git merge --ff-only @{u}"
     diffall = !git difftool --dir-diff
+    # delete branchesremoved from upstream (failing if branch is not merged)
     bd =for-each-ref --format='%(if:equals=[gone])%(upstream:track)%(then)git branch -d %(refname:short)%(end)' refs/heads
+    # force delete brances removed from upstream (failing if branch is not merged)
     bx =for-each-ref --format='%(if:equals=[gone])%(upstream:track)%(then)git branch -D %(refname:short)%(end)' refs/heads
+
     psu = push --set-upstream origin HEAD
+    up = "!git fetch -p; git merge --ff-only @{u}"
+
+    # integrate main/master branch without rebasing (avoid disaster when using rebase=true config)
+    pmaster = pull origin master --no-rebase
+    pmain = pull origin main --no-rebase
 
 [diff]
     guitool = meld
@@ -28,17 +41,24 @@
     prompt = No
 
 
+[core]
+    autocrlf = false
 [push]
 	default = current
+	followTags = true
 
 [pull]
     rebase = true
 
 [diff]
-    tool = meld
+    #tool = vimdiff
+
     renames = true
+	wsErrorHighlight = all
 
 [difftool]
     prompt = false
 [log]
 	follow = true
+[safe]
+	directory = *1
