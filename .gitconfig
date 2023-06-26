@@ -21,10 +21,12 @@
     #briefdiff, handy for showing branch changes (use with master...branchname)
     briefdiff = diff  --stat --color 
     diffall = !git difftool --dir-diff
-    # delete branchesremoved from upstream (failing if branch is not merged)
-    bd =for-each-ref --format='%(if:equals=[gone])%(upstream:track)%(then)git branch -d %(refname:short)%(end)' refs/heads
-    # force delete brances removed from upstream (failing if branch is not merged)
-    bx =for-each-ref --format='%(if:equals=[gone])%(upstream:track)%(then)git branch -D %(refname:short)%(end)' refs/heads
+    # delete branches removed from upstream. 
+    # Shows command to run, but doesn't run them
+    bd =!git pull --prune --quiet  && git for-each-ref --format='%(if:equals=[gone])%(upstream:track)%(then)git branch -d %(refname:short)%(else)echo still in use: %(refname:short)%(end)' refs/heads
+    # force delete brances removed from upstream 
+    # Outputs the commands to run, doesn't run them automatically
+    bx =!git pull --prune --quiet && git for-each-ref --format='%(if:equals=[gone])%(upstream:track)%(then)git branch -D %(refname:short)%(else)echo still in use: %(refname:short)%(end)' refs/heads
 
     psu = push --set-upstream origin HEAD
     up = "!git fetch -p; git merge --ff-only @{u}"
