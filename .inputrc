@@ -5,4 +5,5 @@ set bell-style none
 "\ew": shell-kill-word
 "\e\C-f": shell-forward-word
 "\e\C-b": shell-backward-word
+set mark-symlinked-directories on
 
