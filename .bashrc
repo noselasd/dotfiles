@@ -44,3 +44,6 @@ function nvm_load() {
 function virtualenvwrapper() {
     . ~/bin/virtualenvwrapper
 } 
+# Autocomplete for 'g' git alias
+complete -o bashdefault -o default -o nospace -F __git_wrap__git_main g
+
