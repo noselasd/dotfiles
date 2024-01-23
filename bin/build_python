@@ -1,0 +1,28 @@
+#!/bin/bash
+
+set -e
+PYTHON_VERSION=3.11
+PYTHON_PATCH=7
+INSTALL_PREFIX=/opt/python$PYTHON_VERSION
+
+wget https://www.python.org/ftp/python/$PYTHON_VERSION.$PYTHON_PATCH/Python-$PYTHON_VERSION.$PYTHON_PATCH.tgz
+tar -xvzf Python-$PYTHON_VERSION.$PYTHON_PATCH.tgz
+cd Python-$PYTHON_VERSION.$PYTHON_PATCH
+
+export CFLAGS="-O2 -fwrapv -march=native $(pkg-config  --cflags openssl)" 
+export CPPFLAGS="-O2 -fwrapv -march=native $(pkg-config  --cflags openssl)" 
+export LDFLAGS=" $(pkg-config  --libs openssl)"
+
+scl enable gcc-toolset-11 "./configure --prefix=$INSTALL_PREFIX --enable-optimizations --enable-ipv6 --with-system-ffi"
+scl enable gcc-toolset-11 "make -j4"
+
+echo -e "\n\n-----------------------------------------------"
+echo -e "Done.\n"
+echo -e "To install, run:"
+echo -e "rm -rf $INSTALL_PREFIX ; cd Python-$PYTHON_VERSION.$PYTHON_PATCH ; scl enable gcc-toolset-11 \"sudo make install\"\n"
+echo -e "* Add export PATH=$INSTALL_PREFIX:$PATH to your ~/.bashrc"
+echo -e "* Restart shells and applications to use the new python"
+echo -e "* Recreate python virtual environments with the new python version"
+
+
+
