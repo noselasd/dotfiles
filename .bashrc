@@ -47,3 +47,5 @@ function virtualenvwrapper() {
 # Autocomplete for 'g' git alias
 complete -o bashdefault -o default -o nospace -F __git_wrap__git_main g
 
+export FZF_DEFAULT_OPTS="--color=light --ansi"
+eval "$(fzf --bash)"
