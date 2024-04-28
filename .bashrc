@@ -18,8 +18,7 @@ function mkd() {
         return
     fi
     
-    mkdir "$1"
-    cd "$1"
+    mkdir "$1" && cd "$1"
 }
 
  # set terminal window title
@@ -46,6 +45,7 @@ function virtualenvwrapper() {
 } 
 # Autocomplete for 'g' git alias
 complete -o bashdefault -o default -o nospace -F __git_wrap__git_main g
+complete -o bashdefault -o default -o nospace -F  __start_kubectl k
 
 export FZF_DEFAULT_OPTS="--color=light --ansi"
 eval "$(fzf --bash)"
