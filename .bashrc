@@ -11,7 +11,9 @@ fi
 alias lc="ls -C | less"
 alias ll="ls -lh"
 alias g=git
+alias k=kubectl
 alias rpmdate="date +\"%a %b %d %Y\""
+alias newenv='python3 -m venv --upgrade-deps venv && . venv/bin/activate'
 
 function mkd() {
     if [[ $#  == 0 ]] ; then 
@@ -46,6 +48,18 @@ function virtualenvwrapper() {
 # Autocomplete for 'g' git alias
 complete -o bashdefault -o default -o nospace -F __git_wrap__git_main g
 complete -o bashdefault -o default -o nospace -F  __start_kubectl k
+_completion_loader git
 
 export FZF_DEFAULT_OPTS="--color=light --ansi"
 eval "$(fzf --bash)"
+export PATH=/opt/python3.12/bin:/opt/rh/gcc-toolset-11/root/usr/bin:$PATH
+
+PROJECT_HOME=$HOME/dev
+VIRTUALENVWRAPPER_PYTHON=python3
+VIRTUALENVWRAPPER_VIRTUALENV=//opt/python3.12/bin/virtualenv
+VIRTUALENVWRAPPER_PYTHON=/opt/python3.12/bin/python3
+VIRTUALENVWRAPPER_SCRIPT=/opt/python3.12/bin/virtualenvwrapper.sh
+
+
+source /opt/python3.12/bin/virtualenvwrapper.sh
+source ~/bin/argo_env
