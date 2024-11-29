@@ -14,6 +14,7 @@ alias g=git
 alias k=kubectl
 alias rpmdate="date +\"%a %b %d %Y\""
 alias newenv='python3 -m venv --upgrade-deps venv && . venv/bin/activate'
+alias pipu="pip install -U -r"
 
 function mkd() {
     if [[ $#  == 0 ]] ; then 
