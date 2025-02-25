@@ -34,10 +34,12 @@
     # integrate main/master branch without rebasing (avoid disaster when using rebase=true config)
     pmaster = pull origin master --no-rebase
     pmain = pull origin main --no-rebase
+    shortref = rev-parse --short HEAD
+    fix-email = commit --amend --author='Nils O. Selåsdal <nos@utel.tech>' --no-edit
 
 [diff]
     guitool = meld
-    tool = meld
+    tool = vimdiff
 
 [difftool]
     prompt = No
@@ -48,12 +50,15 @@
 [push]
 	default = current
 	followTags = true
+	autoSetupRemote = true
 
 [pull]
     rebase = true
 
 [diff]
-    #tool = vimdiff
+    algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
 
     renames = true
 	wsErrorHighlight = all
@@ -61,6 +66,15 @@
 [difftool]
     prompt = false
 [log]
-	follow = true
+	#follow = true
 [safe]
 	directory = *1
+[init]
+	defaultBranch = main
+[tag]
+	sort = version:refname
+[column]
+	ui = auto
+[fetch]
+	prune = true
+	pruneTags = true
