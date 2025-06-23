@@ -8,10 +8,10 @@
     co = checkout
     st = status
     # List remote branches
-    blr = for-each-ref --sort=-committerdate refs/remotes/ --format='%(committerdate:short) %(refname:short) %(authorname)'
+    blr = for-each-ref --sort=-committerdate refs/remotes/ --format='%(committerdate:short) %(align:width=36)%(refname:lstrip=3)%(end) %(objectname:short) %(authorname)' 
     # List local branches
-    bll = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(HEAD)%(refname:short) %(authorname) %(push:track)'
-    # show commits not pused upstream
+    bll = for-each-ref --sort=-committerdate refs/heads/ --format='%(committerdate:short) %(align:width=36)%(HEAD)%(refname:short)%(end) %(objectname:short) %(authorname) %(push:track)'
+    # show commits not pused upstream. Doesn't work if upstream branch is missing
     unpushed = log --color @{push}.. --oneline
     # various handy log outputs
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
@@ -43,7 +43,8 @@
 
 [difftool]
     prompt = No
-
+[column]
+    ui = auto
 
 [core]
     autocrlf = false
@@ -73,8 +74,6 @@
 	defaultBranch = main
 [tag]
 	sort = version:refname
-[column]
-	ui = auto
 [fetch]
 	prune = true
 	pruneTags = true
