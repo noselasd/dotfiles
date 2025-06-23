@@ -12,12 +12,13 @@ alias lc="ls -C | less"
 alias ll="ls -lh"
 alias g=git
 alias k=kubectl
+alias d=docker
 alias rpmdate="date +\"%a %b %d %Y\""
+alias pipu="pip install -U -r"
 alias newenv='python3 -m venv --upgrade-deps venv && . venv/bin/activate'
 alias op_signin='eval $(op signin)'
 alias pip="uv pip"
 alias pip3="uv pip"
-alias pipu="pip install -U -r"
 alias bytes='numfmt --to=iec-i --suffix=B --format="%9.2f"'
 
 function mkd() {

@@ -1,10 +1,10 @@
 [user]
-	email = nos@utel.tech
-	name = Nils O. Selåsdal
+    email = nos@utel.tech
+    name = Nils O. Selåsdal
 [alias]
     # list all branches
     br = branch -va
-	ci = commit
+    ci = commit
     co = checkout
     st = status
     # List remote branches
@@ -14,10 +14,9 @@
     # show commits not pused upstream. Doesn't work if upstream branch is missing
     unpushed = log --color @{push}.. --oneline
     # various handy log outputs
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
     flog = log --pretty=format:'%h %ad | %s%d [%an]' --graph --date=short
     vlog = log --name-status
-    #
     #briefdiff, handy for showing branch changes (use with master...branchname)
     briefdiff = diff  --stat --color 
     diffall = !git difftool --dir-diff
@@ -36,44 +35,57 @@
     pmain = pull origin main --no-rebase
     shortref = rev-parse --short HEAD
     fix-email = commit --amend --author='Nils O. Selåsdal <nos@utel.tech>' --no-edit
+    diffn = !GIT_PAGER=diffnav  git diff
 
 [diff]
-    guitool = meld
     tool = vimdiff
+    guitool = kdiff3
+    renames = true
+    wsErrorHighlight = all
+    algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
+    wsErrorHighlight = all
 
 [difftool]
-    prompt = No
+    prompt = false
+
 [column]
     ui = auto
 
 [core]
     autocrlf = false
+
 [push]
-	default = current
-	followTags = true
-	autoSetupRemote = true
+    default = current
+    followTags = true
+    autoSetupRemote = true
 
 [pull]
     rebase = true
 
-[diff]
-    algorithm = histogram
-    colorMoved = plain
-    mnemonicPrefix = true
 
-    renames = true
-	wsErrorHighlight = all
+[filter "lfs"]
+    process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
 
-[difftool]
-    prompt = false
 [log]
-	#follow = true
+    follow = true
 [safe]
-	directory = *1
+    directory = *1
+
 [init]
-	defaultBranch = main
+    defaultBranch = main
+
 [tag]
-	sort = version:refname
+    sort = version:refname
+
 [fetch]
-	prune = true
-	pruneTags = true
+    prune = true
+    pruneTags = true
+
+[difftool "kdiff3"]
+    trustExitCode = false
