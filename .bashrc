@@ -2,7 +2,7 @@
 
 # Source global definitions
 export EDITOR=vim
-export DOCKER_BUILDKIT=0
+#export DOCKER_BUILDKIT=0
 export BUILDKIT_PROGRESS=plain
 if [ -f /etc/bashrc ]; then
     . /etc/bashrc
@@ -14,7 +14,11 @@ alias g=git
 alias k=kubectl
 alias rpmdate="date +\"%a %b %d %Y\""
 alias newenv='python3 -m venv --upgrade-deps venv && . venv/bin/activate'
+alias op_signin='eval $(op signin)'
+alias pip="uv pip"
+alias pip3="uv pip"
 alias pipu="pip install -U -r"
+alias bytes='numfmt --to=iec-i --suffix=B --format="%9.2f"'
 
 function mkd() {
     if [[ $#  == 0 ]] ; then 
@@ -43,6 +47,12 @@ function nvm_load() {
 }
 . "$HOME/.cargo/env"
 
+function urldecode() {
+    python3 -c "import sys; from urllib.parse import unquote; print(unquote(sys.stdin.read()));"
+}
+function urlencode() {
+    python3 -c "import sys; from urllib.parse import quote; print(quote(sys.stdin.read()));"
+}
 function virtualenvwrapper() {
     . ~/bin/virtualenvwrapper
 } 
@@ -51,9 +61,9 @@ complete -o bashdefault -o default -o nospace -F __git_wrap__git_main g
 complete -o bashdefault -o default -o nospace -F  __start_kubectl k
 _completion_loader git
 
-export FZF_DEFAULT_OPTS="--color=light --ansi"
+export FZF_DEFAULT_OPTS="--color=16 --ansi"
 eval "$(fzf --bash)"
-export PATH=/opt/python3.12/bin:/opt/rh/gcc-toolset-11/root/usr/bin:$PATH
+export PATH=~/bin:/opt/python3.12/bin:/opt/rh/gcc-toolset-11/root/usr/bin:$PATH
 
 PROJECT_HOME=$HOME/dev
 VIRTUALENVWRAPPER_PYTHON=python3
