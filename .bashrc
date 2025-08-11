@@ -19,7 +19,7 @@ alias newenv='python3 -m venv --upgrade-deps venv && . venv/bin/activate'
 alias op_signin='eval $(op signin)'
 alias pip="uv pip"
 alias pip3="uv pip"
-alias bytes='numfmt --to=iec-i --suffix=B --format="%9.2f"'
+#alias bytes='numfmt --to=iec-i --suffix=B --format="%9.2f"'
 alias docker-list-images='docker image list --format "{{.Repository}}:{{.Tag}}"'
 
 function mkd() {
