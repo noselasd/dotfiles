@@ -57,9 +57,9 @@ nmap _g :grep <C-R>=expand("<cword>")<CR><CR>:belowright copen<CR><CR>
 "show file completions
 set wildmenu
 
-"Highlight when going over 80 characters per line
-highlight ColorColumn ctermbg=red
-call matchadd('ColorColumn', '\%81v', 100)
+" Highlight when going over Xcharacters per line
+" highlight ColorColumn ctermbg=red
+" call matchadd('ColorColumn', '\%81v', 100)
 
 "have clang_autocomplete auto select and insert the 1. entry
 "let g:clang_auto_select=2
@@ -106,4 +106,18 @@ autocmd FileType markdown setlocal syntax=off
 " disable bell
 set visualbell
 set t_vb=
+
+" Remember last position (default on RHEL)
+"if has("autocmd")
+"  au BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+"endif
+
+" But set position to tart for git commit messages
+augroup gitcommit_cursor_fix
+  autocmd!
+  autocmd BufReadPost {COMMIT_EDITMSG,MERGE_MSG,git-rebase-todo,NOTES_EDITMSG} if &ft =~# 'gitcommit' | call cursor(1,1) | endif
+augroup END
+
+" Workaround for weird syntax hilight issue particular in yaml files on mac
+set maxmempattern=5000
 
