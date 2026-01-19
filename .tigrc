@@ -1,4 +1,5 @@
 set git-colors = no
+set ignore-case = smart-case
 set show-changes = yes
 set ignore-case = smart-case
 set commit-order = topo
