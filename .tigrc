@@ -1,5 +1,6 @@
 set git-colors = no
 set show-changes = yes
+set ignore-case = smart-case
 set commit-order = topo
 set refresh-mode = auto
 set main-view = \
