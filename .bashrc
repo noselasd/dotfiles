@@ -35,8 +35,15 @@ function title() {
     print -Pn "\e]2;$@\a"
 }
 export PATH=~/bin:~/go/bin:/usr/local/go/bin:$PATH
+
 parse_git_branch() {
-     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+    branch=$(git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/')
+    tag=$(git describe --tags --exact-match 2>/dev/null)
+    if [ -n "$tag" ]; then
+        echo "$branch @ $tag"
+    else
+        echo "$branch"
+    fi
 }
 
 
