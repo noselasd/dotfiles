@@ -84,6 +84,9 @@ I hope you enjoy your Neovim journey,
 P.S. You can delete this when you're done too. It's your config now! :)
 --]]
 
+-- build support:
+--vim.opt.makeprg = "make build"
+vim.keymap.set('n', '<C-b>', ':make<CR>', { desc = 'Run make and populate quickfix list' }) --
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
@@ -278,6 +281,23 @@ require('lazy').setup({
   -- options to `gitsigns.nvim`.
   --
   -- See `:help gitsigns` to understand what the configuration keys do
+  {
+    'akinsho/toggleterm.nvim',
+    version = '*',
+    config = true,
+    keys = {
+      { [[<C-\>]], '<cmd>ToggleTerm<cr>', desc = 'Toggle Terminal' },
+      { '<Esc>', [[<C-\><C-n>]], mode = 't', desc = 'Exit terminal mode' },
+    },
+    opts = {
+      size = 20,
+      open_mapping = [[<C-\>]], -- Opens/closes with Ctrl + \
+      hide_numbers = true, -- Hide line numbers in terminal buffers
+      -- shade_terminals = true,
+      direction = 'tab', -- Options: 'vertical', 'horizontal', 'tab', 'float'
+      close_on_exit = true, -- Close the terminal window when the process exits
+    },
+  },
   { -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -311,6 +331,9 @@ require('lazy').setup({
     opts = {
       -- delay between pressing a key and opening which-key (milliseconds)
       -- this setting is independent of vim.o.timeoutlen
+      win = {
+        width = 0.4,
+      },
       delay = 0,
       icons = {
         -- set icon mappings to true if you have a Nerd Font
@@ -961,7 +984,7 @@ require('lazy').setup({
         --  the list of additional_vim_regex_highlighting and disabled languages for indent.
         additional_vim_regex_highlighting = { 'ruby' },
       },
-      indent = { enable = true, disable = { 'ruby' } },
+      -- indent = { enable = true, disable = { 'ruby' } },
     },
     -- There are additional nvim-treesitter modules that you can use to interact
     -- with nvim-treesitter. You should go explore a few and see what interests you:
@@ -1028,3 +1051,15 @@ require('lazy').setup({
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 require('nvim-tree').setup {}
+
+-- remember last position in file
+
+vim.api.nvim_create_autocmd('BufReadPost', {
+  callback = function()
+    local mark = vim.api.nvim_buf_get_mark(0, '"')
+    local lcount = vim.api.nvim_buf_line_count(0)
+    if mark[1] > 0 and mark[1] <= lcount then
+      pcall(vim.api.nvim_win_set_cursor, 0, mark)
+    end
+  end,
+})
