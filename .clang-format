@@ -8,6 +8,7 @@ ColumnLimit: 120
 BreakConstructorInitializers: AfterColon
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
 SortIncludes: false
+AlignEscapedNewlines: LeftWithLastLine
 
 # clang-format 9: AlignConsecutiveMacros: true
 # clang-format 11: AlignConsecutiveBitFields: true
